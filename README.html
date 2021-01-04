@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Table Generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link rel="icon" href="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="js/table.js"></script>
+    <link rel="stylesheet" href="css/style.css" defer>
+    <link rel="stylesheet" href="css/table.css" defer>
+
+
+  </head>
+  <body>
+# Table-Generator
+You just need to return any JSON results from your APIs and the Component, with the right settings, will generate a table to show you the response data.
+
+    <div class="box-table" id="channels"></div>
+	
+    <script>
+      table_composer('channels','Channels','http://localhost/Trend_Tracker/json_test.php',400, true,[15, 100, 100, 100, 50, 50],true);
+    </script>
+
+  </body>
+</html>

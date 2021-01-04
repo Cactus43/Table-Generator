@@ -42,6 +42,12 @@ function table_composer(id, name, url, table_dim, scrollable, col_dim, nav){
           table_nav.setAttribute("id","table_nav_"+id);
 
           var reload_button = document.createElement("button");
+		  if(table_dim!=null && table_dim!='' && table_dim>0){
+			  reload_button.setAttribute("data-table-dim", table_dim);
+		  }
+		  if(scrollable==true){
+			  reload_button.setAttribute("data-table-scroll", scrollable);
+		  }
           //reset_button.setAttribute("id","table_nav_reset_button_"+id);
           reload_button.setAttribute("class","table-nav-reload-button");
           reload_button.setAttribute("data-table-nav-reload-button","table_"+id);
@@ -227,19 +233,25 @@ $('body').on('click', '.cell', function(){
 
         $('body').on('click', '.table-nav-reload-button', function(){
 
-          let dim = new Array();
+          let col_dim = new Array();
 
           let head = document.querySelectorAll('[data-table-head = "'+$(this).attr('data-table-nav-reload-button')+'"]');
           //console.log(head);
           for(d of head){
-            dim.push(d.getAttribute('data-table-head-dim'));
+            col_dim.push(d.getAttribute('data-table-head-dim'));
           }
 
           title = $('#title_'+$(this).attr('data-table-nav-reload-button')).text();
           $('#'+$(this).attr('data-table-nav-reload-button').replace('table_','')).html("");
           //console.log($(this).attr('data-table-nav-reload-button'));
           //console.log(sources.get($(this).attr('data-table-nav-reload-button')));
-          table_composer($(this).attr('data-table-nav-reload-button').replace('table_',''),title,sources.get($(this).attr('data-table-nav-reload-button')),dim,true);
+		  let scrollable;
+		  if($(this).attr('data-table-scroll')=="true"){
+			  scrollable=true;
+		  }else if($(this).attr('data-table-scroll')=="false"){
+			  scrollable=false;
+		  }
+          table_composer($(this).attr('data-table-nav-reload-button').replace('table_',''),title,sources.get($(this).attr('data-table-nav-reload-button')),$(this).attr('data-table-dim'),scrollable,col_dim,true);
         });
 
   });

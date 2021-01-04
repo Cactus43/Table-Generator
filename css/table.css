@@ -8,6 +8,7 @@
   width: fit-content;
 
     /*max-width: 600px;*/
+    overflow-x: scroll;
   }
 
   .box-table>h1{
@@ -198,3 +199,8 @@
 .table-nav-reload-button:active{
   background-color: #B43;
 }
+
+
+
+
+

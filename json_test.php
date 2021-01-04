@@ -10,7 +10,7 @@ $end = array();
 
 while($sql = mysqli_fetch_array($resultU, MYSQLI_ASSOC)){
 
-//adding a null values to test how the table print them
+//adding a null values to test how the tables print them
 	$sql["check"]=null;
 	array_push($end, $sql);
 }

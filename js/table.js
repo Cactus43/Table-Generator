@@ -256,28 +256,84 @@ $('body').on('click', '.cell', function(){
 
   });
 
-        function ASC_sort(prop) {    
-            return function(a, b) {    
-              if(a[prop]==null || a[prop] == '' || b[prop] == null || b[prop] == ''){
-                return 0;
-              }else if (a[prop].toLowerCase() > b[prop].toLowerCase()) {   
-                    return 1;    
-                } else if (a[prop] < b[prop]) {    
-                    return -1;    
-                }    
-                return 0;    
-            }    
+        function ASC_sort(prop) {
+    return function(a, b) {
+
+        if(a[attrName] === undefined || b[attrName] === undefined){
+            return 0;
         }
 
-        function DESC_sort(prop) {    
-            return function(a, b) {   
-              if(a[prop]==null || a[prop] == '' || b[prop] == null || b[prop] == ''){
-                return 0;
-              }else if (a[prop].toLowerCase() < b[prop].toLowerCase()) {    
-                return 1;    
-              } else if (a[prop] > b[prop]) {    
-                return -1;    
-              }    
-                return 0;    
-            }    
-        }   
+        if( (a === true && b === false) ){
+            return 1;
+        }else if (  (a === true && b === true) || (a === false && b === false) ) {
+            return 0;
+        }else if( a === false && b === true ){
+            return -1
+        }
+
+        let temp_a, temp_b;
+
+        if(isNaN(a[attrName])){
+            temp_a = a[attrName].toLowerCase().replaceAll(' ', '');
+        }else{
+            temp_a = a[attrName];
+        }
+        if(isNaN(b[attrName])){
+            temp_b = b[attrName].toLowerCase().replaceAll(' ', '');
+        }else{
+            temp_b = b[attrName];
+        }
+
+        if ((temp_a > temp_b) || temp_b == null || temp_b == '') {
+            //console.log(a[prop].toLowerCase().replaceAll(' ', '') +" | > | "+ b[prop].toLowerCase().replaceAll(' ', ''))
+
+            return 1;
+        } else if ((temp_a < temp_b) || temp_a == null || temp_a == '') {
+            //console.log(a[prop].toLowerCase().replaceAll(' ', '') +" | < | "+ b[prop].toLowerCase().replaceAll(' ', ''))
+
+            return -1;
+        }
+        return 0;
+    }
+}
+
+        function DESC_sort(prop) {
+    return function(a, b) {
+        
+        if(a[attrName] === undefined || b[attrName] === undefined){
+            return 0;
+        }
+
+        if( (a === true && b === false) ){
+            return -1;
+        }else if (  (a === true && b === true) || (a === false && b === false) ) {
+            return 0;
+        }else if( a === false && b === true ){
+            return 1
+        }
+
+        let temp_a, temp_b;
+
+        if(isNaN(a[attrName])){
+            temp_a = a[attrName].toLowerCase().replaceAll(' ', '');
+        }else{
+            temp_a = a[attrName];
+        }
+        if(isNaN(b[attrName])){
+            temp_b = b[attrName].toLowerCase().replaceAll(' ', '');
+        }else{
+            temp_b = b[attrName];
+        }
+
+        if ((temp_a > temp_b) || temp_b == null || temp_b == '') {
+            //console.log(a[prop].toLowerCase().replaceAll(' ', '') +" | > | "+ b[prop].toLowerCase().replaceAll(' ', ''))
+
+            return -1;
+        } else if ((temp_a < temp_b) || temp_a == null || temp_a == '') {
+            //console.log(a[prop].toLowerCase().replaceAll(' ', '') +" | < | "+ b[prop].toLowerCase().replaceAll(' ', ''))
+
+            return 1;
+        }
+        return 0;
+    }
+}  
